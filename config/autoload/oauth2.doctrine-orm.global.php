@@ -3,7 +3,7 @@
 /**
  * The user entity is always stored in another namespace than ZF\OAuth2
  */
-$userEntity = 'Business\User';
+$userEntity = 'User\Business\User';
 
 return array(
     'zf-oauth2-doctrine' => array(

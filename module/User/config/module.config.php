@@ -1,5 +1,22 @@
 <?php
 return array(
+    'doctrine' => array(
+        'driver' => array(
+            'doctrine_user' => array(
+                'class' => 'Doctrine\\ORM\\Mapping\\Driver\\XmlDriver',
+                'cache' => 'array',
+                'extension' => '.dcm.xml',
+                'paths' => array(
+                    0 => __DIR__ . '/doctrine/mapping',
+                ),
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    'User\\Business' => 'doctrine_user',
+                ),
+            ),
+        ),
+    ),
     'router' => array(
         'routes' => array(
             'user.rest.doctrine.user' => array(
@@ -39,7 +56,7 @@ return array(
             ),
             'page_size' => 25,
             'page_size_param' => 'limit',
-            'entity_class' => 'Business\\User',
+            'entity_class' => 'User\\Business\\User',
             'collection_class' => 'User\\V1\\Rest\\User\\UserCollection',
             'service_name' => 'User',
         ),
@@ -86,7 +103,7 @@ return array(
     ),
     'doctrine-hydrator' => array(
         'User\\V1\\Rest\\User\\UserHydrator' => array(
-            'entity_class' => 'Business\\User',
+            'entity_class' => 'User\\Business\\User',
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
             'strategies' => array(),

@@ -30,7 +30,6 @@ return array(
         'ZF\\OAuth2\\Doctrine',
         'ZF\\OAuth2\\Doctrine\\MutateTableNames',
         'Core',
-        'Business',
         26 => 'User',
     ),
     'module_listener_options' => array(

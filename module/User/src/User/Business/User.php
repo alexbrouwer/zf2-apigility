@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Business;
+namespace User\Business;
 
 use ZF\OAuth2\Doctrine\Entity\UserInterface;
 
