@@ -1,7 +1,7 @@
 <?php
 return array(
-    'Api\\V1\\Rest\\User\\Controller' => array(
-        'description' => 'User API',
+    'User\\V1\\Rest\\User\\Controller' => array(
+        'description' => 'User api',
         'collection' => array(
             'description' => 'List of users',
             'GET' => array(
@@ -23,10 +23,10 @@ return array(
         'entity' => array(
             'description' => 'A single user',
             'GET' => array(
-                'description' => 'Get a specific user',
                 'response' => '{
    "username": "username"
 }',
+                'description' => 'Get a specific user',
             ),
             'PUT' => array(
                 'request' => '{
@@ -38,13 +38,11 @@ return array(
                 'description' => 'Update a specific user',
             ),
             'DELETE' => array(
-                'description' => 'Delete a specific user',
                 'request' => '{
    "username": "username"
 }',
-                'response' => '{
-   "username": "username"
-}',
+                'response' => '',
+                'description' => 'Delete a specific user',
             ),
         ),
     ),

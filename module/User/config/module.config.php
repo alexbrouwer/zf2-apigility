@@ -2,12 +2,12 @@
 return array(
     'router' => array(
         'routes' => array(
-            'api.rest.doctrine.user' => array(
+            'user.rest.doctrine.user' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/user[/:user_id]',
+                    'route' => '/api/user[/:user_id]',
                     'defaults' => array(
-                        'controller' => 'Api\\V1\\Rest\\User\\Controller',
+                        'controller' => 'User\\V1\\Rest\\User\\Controller',
                     ),
                 ),
             ),
@@ -15,20 +15,20 @@ return array(
     ),
     'zf-versioning' => array(
         'uri' => array(
-            0 => 'api.rest.doctrine.user',
+            0 => 'user.rest.doctrine.user',
         ),
     ),
     'zf-rest' => array(
-        'Api\\V1\\Rest\\User\\Controller' => array(
-            'listener' => 'Api\\V1\\Rest\\User\\UserResource',
-            'route_name' => 'api.rest.doctrine.user',
+        'User\\V1\\Rest\\User\\Controller' => array(
+            'listener' => 'User\\V1\\Rest\\User\\UserResource',
+            'route_name' => 'user.rest.doctrine.user',
             'route_identifier_name' => 'user_id',
             'entity_identifier_name' => 'id',
             'collection_name' => 'user',
             'entity_http_methods' => array(
                 0 => 'GET',
-                1 => 'DELETE',
-                2 => 'PUT',
+                1 => 'PUT',
+                2 => 'DELETE',
             ),
             'collection_http_methods' => array(
                 0 => 'GET',
@@ -40,34 +40,23 @@ return array(
             'page_size' => 25,
             'page_size_param' => 'limit',
             'entity_class' => 'Business\\User',
-            'collection_class' => 'Api\\V1\\Rest\\User\\UserCollection',
+            'collection_class' => 'User\\V1\\Rest\\User\\UserCollection',
             'service_name' => 'User',
         ),
     ),
     'zf-content-negotiation' => array(
         'controllers' => array(
-            'Api\\V1\\Rest\\User\\Controller' => 'HalJson',
+            'User\\V1\\Rest\\User\\Controller' => 'HalJson',
         ),
         'accept-whitelist' => array(
-            'Api\\V1\\Rest\\User\\Controller' => array(
-                0 => 'application/vnd.api.v1+json',
+            'User\\V1\\Rest\\User\\Controller' => array(
+                0 => 'application/vnd.user.v1+json',
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ),
         ),
         'content-type-whitelist' => array(
-            'Api\\V1\\Rest\\User\\Controller' => array(
-                0 => 'application/json',
-            ),
-        ),
-        'accept_whitelist' => array(
-            'Api\\V1\\Rest\\User\\Controller' => array(
-                0 => 'application/json',
-                1 => 'application/*+json',
-            ),
-        ),
-        'content_type_whitelist' => array(
-            'Api\\V1\\Rest\\User\\Controller' => array(
+            'User\\V1\\Rest\\User\\Controller' => array(
                 0 => 'application/json',
             ),
         ),
@@ -77,45 +66,45 @@ return array(
             'Business\\User' => array(
                 'route_identifier_name' => 'user_id',
                 'entity_identifier_name' => 'id',
-                'route_name' => 'api.rest.doctrine.user',
-                'hydrator' => 'Api\\V1\\Rest\\User\\UserHydrator',
+                'route_name' => 'user.rest.doctrine.user',
+                'hydrator' => 'User\\V1\\Rest\\User\\UserHydrator',
             ),
-            'Api\\V1\\Rest\\User\\UserCollection' => array(
+            'User\\V1\\Rest\\User\\UserCollection' => array(
                 'entity_identifier_name' => 'id',
-                'route_name' => 'api.rest.doctrine.user',
+                'route_name' => 'user.rest.doctrine.user',
                 'is_collection' => true,
             ),
         ),
     ),
     'zf-apigility' => array(
         'doctrine-connected' => array(
-            'Api\\V1\\Rest\\User\\UserResource' => array(
+            'User\\V1\\Rest\\User\\UserResource' => array(
                 'object_manager' => 'doctrine.entitymanager.orm_default',
-                'hydrator' => 'Api\\V1\\Rest\\User\\UserHydrator',
+                'hydrator' => 'User\\V1\\Rest\\User\\UserHydrator',
             ),
         ),
     ),
     'doctrine-hydrator' => array(
-        'Api\\V1\\Rest\\User\\UserHydrator' => array(
+        'User\\V1\\Rest\\User\\UserHydrator' => array(
             'entity_class' => 'Business\\User',
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
             'strategies' => array(),
+            'use_generated_hydrator' => true,
             'filters' => array(
-                'Api\\V1\\Rest\\User\\Filter' => array(
-                    'filter' => 'Api\\V1\\Rest\\User\\Filter',
+                'User\\V1\\Rest\\User\\Filter' => array(
+                    'filter' => 'User\\V1\\Rest\\User\\Filter',
                 ),
             ),
-            'use_generated_hydrator' => true,
         ),
     ),
     'zf-content-validation' => array(
-        'Api\\V1\\Rest\\User\\Controller' => array(
-            'input_filter' => 'Api\\V1\\Rest\\User\\Validator',
+        'User\\V1\\Rest\\User\\Controller' => array(
+            'input_filter' => 'User\\V1\\Rest\\User\\Validator',
         ),
     ),
     'input_filter_specs' => array(
-        'Api\\V1\\Rest\\User\\Validator' => array(
+        'User\\V1\\Rest\\User\\Validator' => array(
             0 => array(
                 'name' => 'username',
                 'required' => true,
@@ -130,7 +119,9 @@ return array(
                 'validators' => array(
                     0 => array(
                         'name' => 'Zend\\I18n\\Validator\\Alnum',
-                        'options' => array(),
+                        'options' => array(
+                            'allowwhitespace' => false,
+                        ),
                     ),
                 ),
                 'description' => 'username',
@@ -138,15 +129,12 @@ return array(
         ),
     ),
     'hydrator-filters' => array(
-        'Api\\V1\\Rest\\User\\Filter' => array(
+        'User\\V1\\Rest\\User\\Filter' => array(
             'password' => array(
                 0 => array(
                     'filter' => 'Core\\Hydrator\\Filter\\AlwaysFilter',
                 ),
             ),
         ),
-    ),
-    'service_manager' => array(
-        'factories' => array(),
     ),
 );

@@ -26,12 +26,12 @@ return array(
         'DoctrineORMModule',
         'Phpro\\DoctrineHydrationModule',
         'ZF\\Apigility\\Doctrine\\Server',
-        'ZF\Doctrine\QueryBuilder',
-        'ZF\OAuth2\Doctrine',
-        'ZF\OAuth2\Doctrine\MutateTableNames',
+        'ZF\\Doctrine\\QueryBuilder',
+        'ZF\\OAuth2\\Doctrine',
+        'ZF\\OAuth2\\Doctrine\\MutateTableNames',
         'Core',
         'Business',
-        'Api',
+        26 => 'User',
     ),
     'module_listener_options' => array(
         'module_paths' => array(
