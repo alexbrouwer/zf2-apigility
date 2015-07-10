@@ -143,4 +143,12 @@ class User implements UserInterface {
 
         return $this;
     }
+
+    public function getArrayCopy() {
+        return array(
+            'id' => $this->getId(),
+            'username' => $this->getUsername(),
+            'password' => $this->getPassword()
+        );
+    }
 }

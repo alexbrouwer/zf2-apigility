@@ -1,19 +1,11 @@
 <?php
 return array(
+    'zf-oauth2' => array(
+        'allow_implicit' => true,
+    ),
     'zf-mvc-auth' => array(
         'authentication' => array(
-            'adapters' => array(
-                'api' => array(
-                    'adapter' => 'ZF\\MvcAuth\\Authentication\\OAuth2Adapter',
-                    'storage' => array(
-                        'adapter' => 'pdo',
-                        'dsn' => 'mysql:dbname=apigility_dev;host=localhost',
-                        'route' => '/oauth',
-                        'username' => 'root',
-                        'password' => '1234hvhv',
-                    ),
-                ),
-            ),
+            'adapters' => array(),
         ),
     ),
 );
