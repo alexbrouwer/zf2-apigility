@@ -95,7 +95,7 @@ class HydratorFilterFactory implements AbstractFactoryInterface
                 $propertyFilter->addFilter($filterKey, $filterService, $condition);
             }
 
-            $filterCollection->addFilter($property, $propertyFilter);
+            $filterCollection->addFilter($property, $propertyFilter, FilterComposite::CONDITION_AND);
         }
 
         return $filterCollection;
