@@ -4,6 +4,7 @@
 namespace User\Event;
 
 
+use User\Business\User;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\ListenerAggregateTrait;
@@ -32,8 +33,10 @@ class UserListener implements ListenerAggregateInterface {
     }
 
     public function onPreCreateEvent(DoctrineResourceEvent $e) {
+        /**
+         * @var User $entity
+         */
         $entity = $e->getEntity();
-
         $entity->changePassword('Welcome123');
     }
 }

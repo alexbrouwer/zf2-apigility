@@ -3,45 +3,13 @@
 
 namespace User\Business;
 
-use ZF\OAuth2\Doctrine\Entity\UserInterface;
+use ZF\OAuth2\Adapter\BcryptTrait;
 
 /**
  * User
  */
-class User implements UserInterface {
-    /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * @var string
-     */
-    protected $username;
-
-    /**
-     * @var string
-     */
-    protected $password;
-
-    protected $client;
-    protected $accessToken;
-    protected $authorizationCode;
-    protected $refreshToken;
-
-    /**
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername() {
-        return $this->username;
-    }
+class User extends OAuthUser {
+    use BcryptTrait;
 
     /**
      * @param string $username
@@ -55,100 +23,13 @@ class User implements UserInterface {
     }
 
     /**
-     * @return string
-     */
-    public function getPassword() {
-        return $this->password;
-    }
-
-    /**
      * @param string $password
      *
      * @return User
      */
     public function changePassword($password) {
-        $this->password = $password;
+        $this->password = $this->createBcryptHash($password);
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getClient() {
-        return $this->client;
-    }
-
-    /**
-     * @param mixed $client
-     *
-     * @return User
-     */
-    public function setClient($client) {
-        $this->client = $client;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAccessToken() {
-        return $this->accessToken;
-    }
-
-    /**
-     * @param mixed $accessToken
-     *
-     * @return User
-     */
-    public function setAccessToken($accessToken) {
-        $this->accessToken = $accessToken;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAuthorizationCode() {
-        return $this->authorizationCode;
-    }
-
-    /**
-     * @param mixed $authorizationCode
-     *
-     * @return User
-     */
-    public function setAuthorizationCode($authorizationCode) {
-        $this->authorizationCode = $authorizationCode;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRefreshToken() {
-        return $this->refreshToken;
-    }
-
-    /**
-     * @param mixed $refreshToken
-     *
-     * @return User
-     */
-    public function setRefreshToken($refreshToken) {
-        $this->refreshToken = $refreshToken;
-
-        return $this;
-    }
-
-    public function getArrayCopy() {
-        return array(
-            'id' => $this->getId(),
-            'username' => $this->getUsername(),
-            'password' => $this->getPassword()
-        );
     }
 }
