@@ -5,7 +5,7 @@ return array(
             'oauth' => array(
                 'options' => array(
                     'spec' => '%oauth%',
-                    'regex' => '(?P<oauth>(/oauth))',
+                    'regex' => '(?P<oauth>(/api/oauth))',
                 ),
                 'type' => 'regex',
             ),
@@ -18,6 +18,7 @@ return array(
                     'adapter' => 'ZF\\MvcAuth\\Authentication\\OAuth2Adapter',
                     'storage' => array(
                         'storage' => 'ZF\\OAuth2\\Doctrine\\Adapter\\DoctrineAdapter',
+                        'route' => '/api/oauth',
                     ),
                 ),
             ),
