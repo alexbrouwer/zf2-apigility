@@ -196,4 +196,24 @@ return array(
             'User\\V1\\Rest\\User\\UserListener' => 'User\\Event\\UserListener',
         ),
     ),
+    'zf-mvc-auth' => array(
+        'authorization' => array(
+            'User\\V1\\Rest\\User\\Controller' => array(
+                'collection' => array(
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ),
+                'entity' => array(
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => false,
+                    'DELETE' => true,
+                ),
+            ),
+        ),
+    ),
 );
