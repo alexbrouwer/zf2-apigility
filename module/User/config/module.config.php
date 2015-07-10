@@ -86,6 +86,12 @@ return array(
                 'route_name' => 'user.rest.doctrine.user',
                 'hydrator' => 'User\\V1\\Rest\\User\\UserHydrator',
             ),
+            'User\\Business\\User' => array(
+                'route_identifier_name' => 'user_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'user.rest.doctrine.user',
+                'hydrator' => 'User\\V1\\Rest\\User\\UserHydrator',
+            ),
             'User\\V1\\Rest\\User\\UserCollection' => array(
                 'entity_identifier_name' => 'id',
                 'route_name' => 'user.rest.doctrine.user',
@@ -98,6 +104,9 @@ return array(
             'User\\V1\\Rest\\User\\UserResource' => array(
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'User\\V1\\Rest\\User\\UserHydrator',
+                'listeners' => array(
+                    0 => 'User\\V1\\Rest\\User\\UserListener',
+                ),
             ),
         ),
     ),
@@ -109,8 +118,8 @@ return array(
             'strategies' => array(),
             'use_generated_hydrator' => true,
             'filters' => array(
-                'User\\V1\\Rest\\User\\Filter' => array(
-                    'filter' => 'User\\V1\\Rest\\User\\Filter',
+                'User\\V1\\Rest\\User\\UserFilter' => array(
+                    'filter' => 'User\\V1\\Rest\\User\\UserFilter',
                 ),
             ),
         ),
@@ -137,7 +146,15 @@ return array(
                     0 => array(
                         'name' => 'Zend\\I18n\\Validator\\Alnum',
                         'options' => array(
-                            'allowwhitespace' => false,
+                            'allowwhitespace' => '',
+                        ),
+                    ),
+                    1 => array(
+                        'name' => 'ZF\\Apigility\\Doctrine\\Server\\Validator\\NoObjectExists',
+                        'options' => array(
+                            'entity_class' => 'User\\Business\\User',
+                            'fields' => 'username',
+                            'message' => 'Username in use',
                         ),
                     ),
                 ),
@@ -146,12 +163,37 @@ return array(
         ),
     ),
     'hydrator-filters' => array(
-        'User\\V1\\Rest\\User\\Filter' => array(
+        'User\\V1\\Rest\\User\\UserFilter' => array(
             'password' => array(
                 0 => array(
                     'filter' => 'Core\\Hydrator\\Filter\\AlwaysFilter',
                 ),
             ),
+            'client' => array(
+                0 => array(
+                    'filter' => 'Core\\Hydrator\\Filter\\AlwaysFilter',
+                ),
+            ),
+            'refreshToken' => array(
+                0 => array(
+                    'filter' => 'Core\\Hydrator\\Filter\\AlwaysFilter',
+                ),
+            ),
+            'accessToken' => array(
+                0 => array(
+                    'filter' => 'Core\\Hydrator\\Filter\\AlwaysFilter',
+                ),
+            ),
+            'authorizationCode' => array(
+                0 => array(
+                    'filter' => 'Core\\Hydrator\\Filter\\AlwaysFilter',
+                ),
+            ),
+        ),
+    ),
+    'service_manager' => array(
+        'invokables' => array(
+            'User\\V1\\Rest\\User\\UserListener' => 'User\\Event\\UserListener',
         ),
     ),
 );
