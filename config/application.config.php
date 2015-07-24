@@ -6,6 +6,10 @@
  */
 return array(
     'modules' => array(
+        // Generic
+        'ZfSnapVarConfig',
+
+        // Apigility
         'Application',
         'ZF\\DevelopmentMode',
         'ZF\\Apigility',
@@ -22,15 +26,21 @@ return array(
         'ZF\\Rest',
         'ZF\\Rpc',
         'ZF\\Versioning',
+
+        // Doctrine ORM
         'DoctrineModule',
         'DoctrineORMModule',
         'Phpro\\DoctrineHydrationModule',
         'ZF\\Apigility\\Doctrine\\Server',
         'ZF\\Doctrine\\QueryBuilder',
+
+        // Doctrine OAUTH
         'ZF\\OAuth2\\Doctrine',
         'ZF\\OAuth2\\Doctrine\\MutateTableNames',
+
+        // Custom modules
         'Core',
-        26 => 'User',
+        'User',
     ),
     'module_listener_options' => array(
         'module_paths' => array(
